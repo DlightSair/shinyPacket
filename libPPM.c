@@ -3,27 +3,20 @@
 #include <string.h>
 #include <stddef.h>
 #include <math.h>
-#include "type.h"
 #include <ctype.h>
+#include "type.h"
 
 void skipCommentsandSpace(FILE *fptr)
 {
     int c;
-
     while (1)
     {
-        while ((c = fgetc(fptr)) != EOF && isspace(c))
-            ;
-
-        if (c == '#')
-        {
-            while ((c = fgetc(fptr)) != EOF && c != '\n')
-                ;
+        while ((c = fgetc(fptr)) != EOF && isspace(c));
+        if (c == '#'){
+            while ((c = fgetc(fptr)) != EOF && c != '\n');
         }
-        else
-        {
+        else{
             if (c != EOF) ungetc(c, fptr);
-
             break;
         }
     }
@@ -75,16 +68,18 @@ PPM createPPM(int width, int height, float weight, char *format)
     if(width < 0 || height < 0) return (PPM){0};
     if(weight < 0) weight = 0;
     if(weight > 1) weight = 1;
-    
-    PPM imagePPM;
-    int pixelArea = width*height;
 
-    imagePPM.width = width;
-    imagePPM.height = height;
-    imagePPM.maxColor = 255;
+    int pixelArea = width*height;
+    
+    PPM imagePPM = {
+        .width = width,
+        .height = height,
+        .maxColor = 255,
+        .image = malloc( pixelArea * sizeof(pixel))
+    };
+
     strncpy(imagePPM.format, format, 3);
 
-    imagePPM.image = malloc( pixelArea * sizeof(pixel));
     int val = (int) imagePPM.maxColor * weight;
 
     for(int i=0; i<pixelArea; i++){

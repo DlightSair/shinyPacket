@@ -10,13 +10,14 @@ void bound(int *val){
 
 PPM convolute(PPM imagePPM, const KERNEL kernel){
 
-    PPM imageOUT;
-    imageOUT.width = imagePPM.width;
-    imageOUT.height = imagePPM.height;
-    imageOUT.maxColor = imagePPM.maxColor;
-    strcpy(imageOUT.format, imagePPM.format);
+    PPM imageOUT = {
+        .width = imagePPM.width,
+        .height = imagePPM.height,
+        .maxColor = imagePPM.maxColor,
+        .image = calloc( imageOUT.width * imageOUT.height , sizeof(pixel))
+    };
 
-    imageOUT.image = calloc( imageOUT.width * imageOUT.height , sizeof(pixel));
+    strcpy(imageOUT.format, imagePPM.format);
 
     for(int i=0; i<imageOUT.height; i++){
         for(int j=0; j<imageOUT.width; j++){
