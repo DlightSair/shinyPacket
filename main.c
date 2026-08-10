@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "type.h"
-#include "libPPM.h"
-#include "conv.h"
+#include "header\type.h"
+#include "header\conv.h"
+#include "header\libPPM.h"
 
 int sData[] = {
     -1, -1, -1,
