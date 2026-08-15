@@ -16,11 +16,8 @@ A small command-line tool for basic PPM image processing in C.
 Requires CMake (>= 3.10) and a C compiler (GCC/Clang/MSVC).
 
 ```bash
-cmake -S . -B build
 cmake --build build
 ```
-
-The resulting binary is `build/cvison` (`build/cvison.exe` on Windows).
 
 ## Usage
 
