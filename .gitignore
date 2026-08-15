@@ -1,0 +1,15 @@
+# Build output
+build/
+out/
+*.exe
+*.o
+*.obj
+
+# Program working files
+output/
+
+# IDE / OS
+.vs/
+.vscode/
+*.user
+Thumbs.db

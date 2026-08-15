@@ -25,13 +25,16 @@ int main(int argsc, char* argsv[])
         return 1;
     }
 
-    int IsGreyScale = 0, IsEdgeDetection = 0;
-    
+    int IsGreyScale = 0, IsEdgeDetection = 0, HasOutput = 0;
+
     char outputFile[64];
     char inputFile[64];
 
     strcpy(inputFile, argsv[1]);
-    if(argsv[2][0] != '-') strcpy(outputFile, argsv[2]);
+    if(argsv[2][0] != '-'){
+        strcpy(outputFile, argsv[2]);
+        HasOutput = 1;
+    }
 
     for(int i=2; i < argsc; i++)
     {
@@ -39,10 +42,12 @@ int main(int argsc, char* argsv[])
             printf("no help :(\n");
         }
         else if(strcmp(argsv[i], "-o") == 0){
-            if(argsc < i+3){
+            if(argsc < i+2){
                 printf("Output File Not Provided!\n");
+                return 1;
             }
             strcpy(outputFile, argsv[i+1]);
+            HasOutput = 1;
         }
         else if(strcmp(argsv[i], "-g") == 0 || strcmp(argsv[i], "--greyscale") == 0){
             IsGreyScale = 1;
@@ -52,11 +57,11 @@ int main(int argsc, char* argsv[])
         }
     }
 
-    if(!outputFile){
+    if(!HasOutput){
         printf("Output File Not Provided!\n");
         return 1;
     }
-    
+
 
     PPM image = readPPM(inputFile);
 
